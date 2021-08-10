@@ -39,11 +39,6 @@ namespace HealthModifier
                 healthModifierController = GameManager.local.gameObject.GetComponent<HealthModifierController>();
                 return;
             }
-            if (healthModifierController == null)
-            {
-                healthModifierController = GameManager.local.gameObject.GetComponent<HealthModifierController>();
-                return;
-            }
             else
             {
                 sliderHealthPlayerHasChanged = healthModifierController.data.SliderHasChangedPlayerGetSet;
