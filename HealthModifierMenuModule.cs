@@ -2,15 +2,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Slider = UnityEngine.UI.Slider;
 
 namespace HealthModifier
 {
     public class HealthModifierMenuModule : MenuModule
     {
-        private Text txtPlayerHealth;
-        private Text txtEnemyHealth;
         private Text txtEnemyRandomHealthDesc;
+        private Button btnPlayerHealth;
+        private Button btnEnemyHealth;
         private Button btnSelectorRightPlayerHealth;
         private Button btnSelectorLeftPlayerHealth;
         private Button btnSelectorRightEnemyHealth;
@@ -53,17 +52,13 @@ namespace HealthModifier
         private Button btnSelectorLeftGodModifier;
         private Button btnSelectorRightTitanModifier;
         private Button btnSelectorLeftTitanModifier;
-        private Slider sliderPlayerHealth;
-        private Slider sliderEnemyHealth;
         private bool valueChanged;
         private bool ConfirmModifierisOk;
         private string txtSelectorTemp;
         public HealthModifierController healthModifierController;
-        public int valueMaxOfPlayerHealthPercent;
-        private int valueMinOfPlayerHealthPercent = 25;
-        public int valueMaxOfEnemyHealthPercent;
-        private int valueMinOfEnemyHealthPercent = 25;
-        private int modulusHealthPercent = 5;
+        public HealthModifierHook healthModifierHook;
+        private int valueDefaultPlayerHealthPercent = 100;
+        private int valueDefaultEnemyHealthPercent = 100;
         private int nbSelectorPlayerHealth = 2;
         private int nbSelectorEnemyHealth = 3;
         private int nbSelectorRanksModifier = 11;
@@ -73,14 +68,14 @@ namespace HealthModifier
             base.Init(menuData, menu);
 
             // Grab the value from Unity
-            txtPlayerHealth = menu.GetCustomReference("txt_PlayerHealth").GetComponent<Text>();
-            txtEnemyHealth = menu.GetCustomReference("txt_EnemyHealth").GetComponent<Text>();
+            btnPlayerHealth = menu.GetCustomReference("btn_PlayerHealth").GetComponent<Button>();
+            btnEnemyHealth = menu.GetCustomReference("btn_EnemyHealth").GetComponent<Button>();
             txtEnemyRandomHealthDesc = menu.GetCustomReference("txt_EnemyRandomHealthDesc").GetComponent<Text>();
-            btnSelectorRightPlayerHealth = menu.GetCustomReference("btn_SelectorRightPlayerHealth").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftPlayerHealth = menu.GetCustomReference("btn_SelectorLeftPlayerHealth").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightEnemyHealth = menu.GetCustomReference("btn_SelectorRightEnemyHealth").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftEnemyHealth = menu.GetCustomReference("btn_SelectorLeftEnemyHealth").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRandomEnemyHealth = menu.GetCustomReference("btn_SelectorRandomEnemyHealth").GetComponent<UnityEngine.UI.Button>();
+            btnSelectorRightPlayerHealth = menu.GetCustomReference("btn_SelectorRightPlayerHealth").GetComponent<Button>();
+            btnSelectorLeftPlayerHealth = menu.GetCustomReference("btn_SelectorLeftPlayerHealth").GetComponent<Button>();
+            btnSelectorRightEnemyHealth = menu.GetCustomReference("btn_SelectorRightEnemyHealth").GetComponent<Button>();
+            btnSelectorLeftEnemyHealth = menu.GetCustomReference("btn_SelectorLeftEnemyHealth").GetComponent<Button>();
+            btnSelectorRandomEnemyHealth = menu.GetCustomReference("btn_SelectorRandomEnemyHealth").GetComponent<Button>();
             objWeightedRandomModifiersHide = menu.GetCustomReference("obj_WeightedRandomModifiersHide").gameObject;
             txtSelectorTotalValueModifier = menu.GetCustomReference("txt_SelectorTotalModifierValue").GetComponent<Text>();
             txtSelectorBeggarModifier = menu.GetCustomReference("txt_SelectorBeggarModifier").GetComponent<Text>();
@@ -95,33 +90,33 @@ namespace HealthModifier
             txtSelectorGodModifier = menu.GetCustomReference("txt_SelectorGodModifier").GetComponent<Text>();
             txtSelectorTitanModifier = menu.GetCustomReference("txt_SelectorTitanModifier").GetComponent<Text>();
             txtSelectorTotalValueModifierDesc = menu.GetCustomReference("txt_SelectorTotalModifierValueDesc").GetComponent<Text>();
-            btnSelectorConfirm = menu.GetCustomReference("btn_SelectorConfirm").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightBeggarModifier = menu.GetCustomReference("btn_SelectorRightBeggarModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftBeggarModifier = menu.GetCustomReference("btn_SelectorLeftBeggarModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightPeasantModifier = menu.GetCustomReference("btn_SelectorRightPeasantModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftPeasantModifier = menu.GetCustomReference("btn_SelectorLeftPeasantModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightMilitiaModifier = menu.GetCustomReference("btn_SelectorRightMilitiaModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftMilitiaModifier = menu.GetCustomReference("btn_SelectorLeftMilitiaModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightGladiatorModifier = menu.GetCustomReference("btn_SelectorRightGladiatorModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftGladiatorModifier = menu.GetCustomReference("btn_SelectorLeftGladiatorModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightWarriorModifier = menu.GetCustomReference("btn_SelectorRightWarriorModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftWarriorModifier = menu.GetCustomReference("btn_SelectorLeftWarriorModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightKnightModifier = menu.GetCustomReference("btn_SelectorRightKnightModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftKnightModifier = menu.GetCustomReference("btn_SelectorLeftKnightModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightLordModifier = menu.GetCustomReference("btn_SelectorRightLordModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftLordModifier = menu.GetCustomReference("btn_SelectorLeftLordModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightKingModifier = menu.GetCustomReference("btn_SelectorRightKingModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftKingModifier = menu.GetCustomReference("btn_SelectorLeftKingModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightDemiGodModifier = menu.GetCustomReference("btn_SelectorRightDemiGodModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftDemiGodModifier = menu.GetCustomReference("btn_SelectorLeftDemiGodModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightGodModifier = menu.GetCustomReference("btn_SelectorRightGodModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftGodModifier = menu.GetCustomReference("btn_SelectorLeftGodModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorRightTitanModifier = menu.GetCustomReference("btn_SelectorRightTitanModifier").GetComponent<UnityEngine.UI.Button>();
-            btnSelectorLeftTitanModifier = menu.GetCustomReference("btn_SelectorLeftTitanModifier").GetComponent<UnityEngine.UI.Button>();
-            sliderPlayerHealth = menu.GetCustomReference("slider_PlayerHealth").GetComponent<UnityEngine.UI.Slider>();
-            sliderEnemyHealth = menu.GetCustomReference("slider_EnemyHealth").GetComponent<UnityEngine.UI.Slider>();
+            btnSelectorConfirm = menu.GetCustomReference("btn_SelectorConfirm").GetComponent<Button>();
+            btnSelectorRightBeggarModifier = menu.GetCustomReference("btn_SelectorRightBeggarModifier").GetComponent<Button>();
+            btnSelectorLeftBeggarModifier = menu.GetCustomReference("btn_SelectorLeftBeggarModifier").GetComponent<Button>();
+            btnSelectorRightPeasantModifier = menu.GetCustomReference("btn_SelectorRightPeasantModifier").GetComponent<Button>();
+            btnSelectorLeftPeasantModifier = menu.GetCustomReference("btn_SelectorLeftPeasantModifier").GetComponent<Button>();
+            btnSelectorRightMilitiaModifier = menu.GetCustomReference("btn_SelectorRightMilitiaModifier").GetComponent<Button>();
+            btnSelectorLeftMilitiaModifier = menu.GetCustomReference("btn_SelectorLeftMilitiaModifier").GetComponent<Button>();
+            btnSelectorRightGladiatorModifier = menu.GetCustomReference("btn_SelectorRightGladiatorModifier").GetComponent<Button>();
+            btnSelectorLeftGladiatorModifier = menu.GetCustomReference("btn_SelectorLeftGladiatorModifier").GetComponent<Button>();
+            btnSelectorRightWarriorModifier = menu.GetCustomReference("btn_SelectorRightWarriorModifier").GetComponent<Button>();
+            btnSelectorLeftWarriorModifier = menu.GetCustomReference("btn_SelectorLeftWarriorModifier").GetComponent<Button>();
+            btnSelectorRightKnightModifier = menu.GetCustomReference("btn_SelectorRightKnightModifier").GetComponent<Button>();
+            btnSelectorLeftKnightModifier = menu.GetCustomReference("btn_SelectorLeftKnightModifier").GetComponent<Button>();
+            btnSelectorRightLordModifier = menu.GetCustomReference("btn_SelectorRightLordModifier").GetComponent<Button>();
+            btnSelectorLeftLordModifier = menu.GetCustomReference("btn_SelectorLeftLordModifier").GetComponent<Button>();
+            btnSelectorRightKingModifier = menu.GetCustomReference("btn_SelectorRightKingModifier").GetComponent<Button>();
+            btnSelectorLeftKingModifier = menu.GetCustomReference("btn_SelectorLeftKingModifier").GetComponent<Button>();
+            btnSelectorRightDemiGodModifier = menu.GetCustomReference("btn_SelectorRightDemiGodModifier").GetComponent<Button>();
+            btnSelectorLeftDemiGodModifier = menu.GetCustomReference("btn_SelectorLeftDemiGodModifier").GetComponent<Button>();
+            btnSelectorRightGodModifier = menu.GetCustomReference("btn_SelectorRightGodModifier").GetComponent<Button>();
+            btnSelectorLeftGodModifier = menu.GetCustomReference("btn_SelectorLeftGodModifier").GetComponent<Button>();
+            btnSelectorRightTitanModifier = menu.GetCustomReference("btn_SelectorRightTitanModifier").GetComponent<Button>();
+            btnSelectorLeftTitanModifier = menu.GetCustomReference("btn_SelectorLeftTitanModifier").GetComponent<Button>();
 
             // Add an event listener for buttons
+            btnPlayerHealth.onClick.AddListener(ClickBtnPlayerHealth);
+            btnEnemyHealth.onClick.AddListener(ClickBtnEnemyHealth);
             btnSelectorRightPlayerHealth.onClick.AddListener(ClickSelectorRightPlayerHealth);
             btnSelectorLeftPlayerHealth.onClick.AddListener(ClickSelectorLeftPlayerHealth);
             btnSelectorRightEnemyHealth.onClick.AddListener(ClickSelectorRightEnemyHealth);
@@ -151,30 +146,6 @@ namespace HealthModifier
             btnSelectorRightTitanModifier.onClick.AddListener(ClickSelectorRightTitanModifier);
             btnSelectorLeftTitanModifier.onClick.AddListener(ClickSelectorLeftTitanModifier);
 
-            // Verify if the value isn't below 100, else put 100
-            if (valueMaxOfPlayerHealthPercent <= 100)
-            {
-                valueMaxOfPlayerHealthPercent = 100;
-            }
-           
-            if (valueMaxOfEnemyHealthPercent <= 100)
-            {
-                valueMaxOfEnemyHealthPercent = 100;
-            }
-
-            // Add an event listener for the sliders
-
-            sliderPlayerHealth.wholeNumbers = true;
-            sliderPlayerHealth.minValue = valueMinOfPlayerHealthPercent / modulusHealthPercent;
-            sliderPlayerHealth.maxValue = valueMaxOfPlayerHealthPercent / modulusHealthPercent;
-            sliderPlayerHealth.value = sliderPlayerHealth.minValue;
-            sliderPlayerHealth.onValueChanged.AddListener(delegate { ValueChangedSliderPlayerHealth(); });
-
-            sliderEnemyHealth.wholeNumbers = true;
-            sliderEnemyHealth.minValue = valueMinOfEnemyHealthPercent / modulusHealthPercent;
-            sliderEnemyHealth.maxValue = valueMaxOfEnemyHealthPercent / modulusHealthPercent;
-            sliderEnemyHealth.value = sliderEnemyHealth.minValue;
-            sliderEnemyHealth.onValueChanged.AddListener(delegate { ValueChangedSliderEnemyHealth(); });
             // Initialization of datas
 
             healthModifierController = GameManager.local.gameObject.AddComponent<HealthModifierController>();
@@ -184,8 +155,14 @@ namespace HealthModifier
             healthModifierController.data.nbRankModifiersGetSet = nbSelectorRanksModifier;
             healthModifierController.data.selectorModifiersGetSet = new int[nbSelectorRanksModifier];
             healthModifierController.data.ErrorModifiersGetSet = false;
-            healthModifierController.data.SliderHasChangedPlayerGetSet = false;
-            healthModifierController.data.SliderHasChangedEnemyGetSet = false;
+            healthModifierController.data.ValueHasChangedPlayerGetSet = false;
+            healthModifierController.data.ValueHasChangedEnemyGetSet = false;
+            healthModifierController.data.ValueHealthPlayerGetSet = valueDefaultPlayerHealthPercent;
+            healthModifierController.data.ValueHealthEnemyGetSet = valueDefaultEnemyHealthPercent;
+
+
+            healthModifierHook = menu.gameObject.AddComponent<HealthModifierHook>();
+            healthModifierHook.menu = this;
             // Update all the Data for left page (text, visibility of buttons etc...)
             UpdateDataPageLeft1();
             // Update all the Data for right page (text, visibility of buttons etc...)
@@ -196,31 +173,20 @@ namespace HealthModifier
         {
             /* Values Selectable for player :
             *   Value00 at 100; 100%
-            *   Value01 at SliderValue;  Slider%
+            *   Value01 at Value;  Value%
             *   Default at 100;  100%
             */
             // For button switch
             switch (healthModifierController.data.SelecModeSelectorPlayerGetSet)
             {
                 case 0:
-                    //Deactivate the Player health slider
-                    if (sliderPlayerHealth.gameObject.activeSelf)
-                        sliderPlayerHealth.gameObject.SetActive(false);
-                    txtPlayerHealth.text = "Default";
+                    btnPlayerHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Default";
                     break;
                 case 1:
-                    //Activate the Player health slider
-                    if (!sliderPlayerHealth.gameObject.activeSelf)
-                    {
-                        sliderPlayerHealth.gameObject.SetActive(true);
-                        healthModifierController.data.SliderValueHealthPlayerGetSet = sliderPlayerHealth.value * modulusHealthPercent;
-                    }
-                    txtPlayerHealth.text = healthModifierController.data.SliderValueHealthPlayerGetSet.ToString() + "%";
+                    btnPlayerHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = healthModifierController.data.ValueHealthPlayerGetSet.ToString() + "%";
                     break;
                 default:
-                    if (sliderEnemyHealth.gameObject.activeSelf)
-                        sliderEnemyHealth.gameObject.SetActive(false);
-                    txtPlayerHealth.text = "Default";
+                    btnPlayerHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Default";
                     break;
             }
         }
@@ -237,32 +203,37 @@ namespace HealthModifier
             switch (healthModifierController.data.SelecModeSelectorEnemyGetSet)
             {
                 case 0:
-                    //Deactivate the Player health slider
-                    if (sliderEnemyHealth.gameObject.activeSelf)
-                        sliderEnemyHealth.gameObject.SetActive(false);
-                    txtEnemyHealth.text = "Default";
+                    btnEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Default";
                     break;
                 case 1:
-                    //Activate the Player health slider
-                    if (!sliderEnemyHealth.gameObject.activeSelf)
-                    {
-                        sliderEnemyHealth.gameObject.SetActive(true);
-                        healthModifierController.data.SliderValueHealthEnemyGetSet = sliderEnemyHealth.value * modulusHealthPercent;
-                    }
-                    txtEnemyHealth.text = healthModifierController.data.SliderValueHealthEnemyGetSet.ToString() + "%";
+                    btnEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = healthModifierController.data.ValueHealthEnemyGetSet.ToString() + "%";
                     break;
                 case 2:
-                    if (sliderEnemyHealth.gameObject.activeSelf)
-                        sliderEnemyHealth.gameObject.SetActive(false);
-                    txtEnemyHealth.text = "Random";
+                    btnEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Random";
                     break;
                 default:
-                    if (sliderEnemyHealth.gameObject.activeSelf)
-                        sliderEnemyHealth.gameObject.SetActive(false);
-                    txtEnemyHealth.text = "100%";
+                    btnEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Default";
                     break;
             }
         }
+
+        public void ClickBtnPlayerHealth()
+        {
+            if(healthModifierController.data.SelecModeSelectorPlayerGetSet == 1)
+            {
+                healthModifierController.data.ValueToAssignIsUint = true;
+                healthModifierController.data.ButtonPlayerHealthPressedGetSet = true;
+            }
+        }
+        public void ClickBtnEnemyHealth()
+        {
+            if(healthModifierController.data.SelecModeSelectorEnemyGetSet == 1)
+            {
+                healthModifierController.data.ValueToAssignIsUint = true;
+                healthModifierController.data.ButtonEnemyHealthPressedGetSet = true;
+            }
+        }
+
         // Change the value of the selector "SelecModeSelectorPlayer" in the "HealthModifierLevelModule" Class (allow to select different value until the selector reach 1, can't go to 2)
         // at 1, it disables the button
         public void ClickSelectorRightPlayerHealth()
@@ -285,14 +256,6 @@ namespace HealthModifier
                 healthModifierController.data.SelectorHasChangedPlayerGetSet = true;
             }
             ChangeTextPlayerHealth();
-            UpdateDataPageLeft1();
-        }
-
-
-        public void ValueChangedSliderPlayerHealth()
-        {
-            healthModifierController.data.SliderValueHealthPlayerGetSet = sliderPlayerHealth.value * modulusHealthPercent;
-            healthModifierController.data.SliderHasChangedPlayerGetSet = true;
             UpdateDataPageLeft1();
         }
 
@@ -319,13 +282,6 @@ namespace HealthModifier
         public void ClickSelectorPureRandomEnemyHealth()
         {
             healthModifierController.data.PureRandomSelectionGetSet = !healthModifierController.data.PureRandomSelectionGetSet;
-            UpdateDataPageLeft1();
-        }
-
-        public void ValueChangedSliderEnemyHealth()
-        {
-            healthModifierController.data.SliderValueHealthEnemyGetSet = sliderEnemyHealth.value * modulusHealthPercent;
-            healthModifierController.data.SliderHasChangedEnemyGetSet = true;
             UpdateDataPageLeft1();
         }
 
@@ -743,14 +699,11 @@ namespace HealthModifier
             ChangeTextSelectorModifier(10);
             UpdateDataPageRight1();
         }
-
-
-
         // When selector is click change display to Error or Confirmed
         public void ClickSelectorConfirm()
         {
             ConfirmModifierisOk = checkIfCanConfirm();
-            btnSelectorConfirm.GetComponentInChildren<Text>().text = ConfirmModifierisOk ? "Confirmed" : "Error";
+            btnSelectorConfirm.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = ConfirmModifierisOk ? "Confirmed" : "Error";
             UpdateDataPageRight1();
         }
         // Calculate the total value of modifier (in %)
@@ -808,13 +761,42 @@ namespace HealthModifier
             
         }
 
+        public void ValueToAssign()
+        {
+            //Assign a value when enter keyboard is pressed
+            if (healthModifierController.data.KeyboardFinishEnterButtonPressedGetSet == true)
+            {
+                // Assign the value of player's health
+                if (healthModifierController.data.ButtonPlayerHealthPressedGetSet == true)
+                {
+                    healthModifierController.data.ButtonEnemyHealthPressedGetSet = false;
+                    healthModifierController.data.ValueHealthPlayerGetSet = (float)healthModifierController.data.ValueToAssignedUintGetSet;
+                    healthModifierController.data.ButtonPlayerHealthPressedGetSet = false;
+                    healthModifierController.data.KeyboardFinishEnterButtonPressedGetSet = false;
+                    healthModifierController.data.ValueHasChangedPlayerGetSet = true;
+                }
+                // Assign the value of enemy's health
+                if (healthModifierController.data.ButtonEnemyHealthPressedGetSet == true)
+                {
+                    healthModifierController.data.ButtonPlayerHealthPressedGetSet = false;
+
+                    healthModifierController.data.ValueHealthEnemyGetSet = (float)(healthModifierController.data.ValueToAssignedUintGetSet);
+                    healthModifierController.data.ButtonEnemyHealthPressedGetSet = false;
+                    healthModifierController.data.KeyboardFinishEnterButtonPressedGetSet = false;
+                    healthModifierController.data.ValueHasChangedEnemyGetSet = true;
+                }
+            }
+        }
+
         public void UpdateDataPageLeft1()
         {
+            ValueToAssign();
             // Set to change the value in the level module
             ChangeTextPlayerHealth();
             ChangeTextEnemyHealth();
             // Change text when clicked
-            btnSelectorRandomEnemyHealth.GetComponentInChildren<Text>().text = healthModifierController.data.PureRandomSelectionGetSet ? "Disabled " : "Enabled";
+            btnSelectorRandomEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = healthModifierController.data.PureRandomSelectionGetSet ? "Disabled " : "Enabled";
+            
             // Disable arrows when they reach the hightest or lowest value
             if (healthModifierController.data.SelecModeSelectorPlayerGetSet >= nbSelectorPlayerHealth - 1)
                 btnSelectorRightPlayerHealth.enabled = false;
@@ -854,6 +836,7 @@ namespace HealthModifier
 
         public void UpdateDataPageRight1()
         {
+            ValueToAssign();
             // Change to default if error in value
             if (healthModifierController.data.ErrorModifiersGetSet)
             {
@@ -871,7 +854,7 @@ namespace HealthModifier
             if (valueChanged == true)
             {
                 ConfirmModifierisOk = false;
-                btnSelectorConfirm.GetComponentInChildren<Text>().text = "Confirm ?";
+                btnSelectorConfirm.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = "Confirm ?";
                 valueChanged = false;
             }
             healthModifierController.data.SelectorModifiersConfirmGetSet = ConfirmModifierisOk;
@@ -964,6 +947,16 @@ namespace HealthModifier
                 btnSelectorLeftTitanModifier.enabled = false;
             else
                 btnSelectorLeftTitanModifier.enabled = true;
+        }
+        // Refresh the menu each frame (need optimization)
+        public class HealthModifierHook : MonoBehaviour
+        {
+            public HealthModifierMenuModule menu;
+            void Update()
+            {
+                menu.UpdateDataPageLeft1();
+                menu.UpdateDataPageRight1();
+            }
         }
     }
 }
