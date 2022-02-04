@@ -53,7 +53,6 @@ namespace HealthModifier
                         {
                             // When a creature is spawning, start this coroutine
                             GameManager.local.StartCoroutine(IEHealthModifier(creature));
-
                         }
                     }
                 }
@@ -84,6 +83,7 @@ namespace HealthModifier
             {
                 Player.local.creature.currentHealth = healthValuePlayer;
                 Player.local.creature.maxHealth = healthValuePlayer;
+                Player.local.creature.data.health = (short) healthValuePlayer;
             }
             healthModifierController.data.ValueHasChangedPlayerGetSet = false;
         }

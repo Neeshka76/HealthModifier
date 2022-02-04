@@ -117,7 +117,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).pdb" "D:\Steam\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\StreamingAssets\Mods\$(ProjectName)\$(TargetName).pdb"
-copy /Y "$(TargetDir)$(TargetName).dll" "D:\Steam\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\StreamingAssets\Mods\$(ProjectName)\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).pdb" "E:\SteamLibrary\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\StreamingAssets\Mods\$(ProjectName)\$(TargetName).pdb"
+copy /Y "$(TargetDir)$(TargetName).dll" "E:\SteamLibrary\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\StreamingAssets\Mods\$(ProjectName)\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
