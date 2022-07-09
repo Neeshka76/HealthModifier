@@ -160,7 +160,6 @@ namespace HealthModifier
             healthModifierController.data.ValueHealthPlayerGetSet = valueDefaultPlayerHealthPercent;
             healthModifierController.data.ValueHealthEnemyGetSet = valueDefaultEnemyHealthPercent;
 
-
             healthModifierHook = menu.gameObject.AddComponent<HealthModifierHook>();
             healthModifierHook.menu = this;
             // Update all the Data for left page (text, visibility of buttons etc...)
