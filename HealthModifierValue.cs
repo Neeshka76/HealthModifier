@@ -1,5 +1,4 @@
-﻿using ThunderRoad;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace HealthModifier
@@ -144,9 +143,9 @@ namespace HealthModifier
                 //When i = 8; value for DemiGod
                 //When i = 9; value for God
                 //When i = 10; value for Titan
-                
+
                 int value = 0;
-                for(int i = 0; i <= 10; i++)
+                for (int i = 0; i <= 10; i++)
                 {
                     // Use the values of the modifiers only if confirmed
                     if (confirmWithModifiers == false)
@@ -160,7 +159,7 @@ namespace HealthModifier
                     // Default values
                     if (value == 0)
                     {
-                        switch(i)
+                        switch (i)
                         {
                             case 0:
                                 selectorBeggar = 5.0f;
@@ -237,7 +236,7 @@ namespace HealthModifier
                         }
                     }
                 }
-                
+
                 // Selector Values Calculus
 
                 selectorBeggarLow = 0.0f; // Always at 0 (%)
@@ -255,9 +254,9 @@ namespace HealthModifier
                 selectorLordLow = selectorKnightHigh;
                 selectorLordHigh = selectorLordLow + selectorLord;
                 selectorKingLow = selectorLordHigh;
-                selectorKingHigh = selectorKingLow + selectorKing; 
+                selectorKingHigh = selectorKingLow + selectorKing;
                 selectorDemiGodLow = selectorKingHigh;
-                selectorDemiGodHigh = selectorDemiGodLow + selectorDemiGod; 
+                selectorDemiGodHigh = selectorDemiGodLow + selectorDemiGod;
                 selectorGodLow = selectorDemiGodHigh;
                 selectorGodHigh = selectorGodLow + selectorGod;
                 selectorTitanLow = selectorGodHigh;

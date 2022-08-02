@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using ThunderRoad;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

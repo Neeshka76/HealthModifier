@@ -1,6 +1,5 @@
 ﻿using ThunderRoad;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace HealthModifier
@@ -218,7 +217,7 @@ namespace HealthModifier
 
         public void ClickBtnPlayerHealth()
         {
-            if(healthModifierController.data.SelecModeSelectorPlayerGetSet == 1)
+            if (healthModifierController.data.SelecModeSelectorPlayerGetSet == 1)
             {
                 healthModifierController.data.ValueToAssignIsUint = true;
                 healthModifierController.data.ButtonPlayerHealthPressedGetSet = true;
@@ -226,7 +225,7 @@ namespace HealthModifier
         }
         public void ClickBtnEnemyHealth()
         {
-            if(healthModifierController.data.SelecModeSelectorEnemyGetSet == 1)
+            if (healthModifierController.data.SelecModeSelectorEnemyGetSet == 1)
             {
                 healthModifierController.data.ValueToAssignIsUint = true;
                 healthModifierController.data.ButtonEnemyHealthPressedGetSet = true;
@@ -301,7 +300,7 @@ namespace HealthModifier
                     txtSelectorTotalValueModifierDesc.gameObject.SetActive(true);
                 if (!txtSelectorTotalValueModifier.gameObject.activeSelf)
                     txtSelectorTotalValueModifier.gameObject.SetActive(true);
-                txtSelectorTotalValueModifier.text = ((int)((double)(num - healthModifierController.data.nbRankModifiersGetSet) * 5.0)).ToString() + "%";
+                txtSelectorTotalValueModifier.text = ((int)((num - healthModifierController.data.nbRankModifiersGetSet) * 5.0)).ToString() + "%";
             }
         }
 
@@ -709,11 +708,9 @@ namespace HealthModifier
         public float CalculateValueModifierTotal()
         {
             int num = 0;
-            float valueCalculated;
             for (int index = 0; index <= healthModifierController.data.nbRankModifiersGetSet - 1; index++)
                 num += healthModifierController.data.selectorModifiersGetSet[index];
-            valueCalculated = (float)((num - healthModifierController.data.nbRankModifiersGetSet) * 5.0);
-            return valueCalculated;
+            return (float)((num - healthModifierController.data.nbRankModifiersGetSet) * 5.0);
         }
 
         public int CalculateValueSelectorTotal()
@@ -757,7 +754,7 @@ namespace HealthModifier
                     healthModifierController.data.selectorModifiersGetSet[index] = 0;
                 switchToDefault = false;
             }
-            
+
         }
 
         public void ValueToAssign()
@@ -769,7 +766,7 @@ namespace HealthModifier
                 if (healthModifierController.data.ButtonPlayerHealthPressedGetSet == true)
                 {
                     healthModifierController.data.ButtonEnemyHealthPressedGetSet = false;
-                    healthModifierController.data.ValueHealthPlayerGetSet = (float)healthModifierController.data.ValueToAssignedUintGetSet;
+                    healthModifierController.data.ValueHealthPlayerGetSet = healthModifierController.data.ValueToAssignedUintGetSet;
                     healthModifierController.data.ButtonPlayerHealthPressedGetSet = false;
                     healthModifierController.data.KeyboardFinishEnterButtonPressedGetSet = false;
                     healthModifierController.data.ValueHasChangedPlayerGetSet = true;
@@ -779,7 +776,7 @@ namespace HealthModifier
                 {
                     healthModifierController.data.ButtonPlayerHealthPressedGetSet = false;
 
-                    healthModifierController.data.ValueHealthEnemyGetSet = (float)(healthModifierController.data.ValueToAssignedUintGetSet);
+                    healthModifierController.data.ValueHealthEnemyGetSet = healthModifierController.data.ValueToAssignedUintGetSet;
                     healthModifierController.data.ButtonEnemyHealthPressedGetSet = false;
                     healthModifierController.data.KeyboardFinishEnterButtonPressedGetSet = false;
                     healthModifierController.data.ValueHasChangedEnemyGetSet = true;
@@ -795,7 +792,7 @@ namespace HealthModifier
             ChangeTextEnemyHealth();
             // Change text when clicked
             btnSelectorRandomEnemyHealth.transform.GetChild(0).gameObject.GetComponentInChildren<Text>().text = healthModifierController.data.PureRandomSelectionGetSet ? "Disabled " : "Enabled";
-            
+
             // Disable arrows when they reach the hightest or lowest value
             if (healthModifierController.data.SelecModeSelectorPlayerGetSet >= nbSelectorPlayerHealth - 1)
                 btnSelectorRightPlayerHealth.enabled = false;
@@ -805,7 +802,7 @@ namespace HealthModifier
                 btnSelectorLeftPlayerHealth.enabled = false;
             else
                 btnSelectorLeftPlayerHealth.enabled = true;
-            
+
             if (healthModifierController.data.SelecModeSelectorEnemyGetSet >= nbSelectorEnemyHealth - 1)
                 btnSelectorRightEnemyHealth.enabled = false;
             else
@@ -814,7 +811,7 @@ namespace HealthModifier
                 btnSelectorLeftEnemyHealth.enabled = false;
             else
                 btnSelectorLeftEnemyHealth.enabled = true;
-            
+
             // Display the weighted randomness when enemy health is set to Random
             if (healthModifierController.data.SelecModeSelectorEnemyGetSet == nbSelectorEnemyHealth - 1)
             {
