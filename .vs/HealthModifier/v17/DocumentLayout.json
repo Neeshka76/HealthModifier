@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|e:\\prog\\mods\\blade_and_sorcery\\healthmodifier\\healthmodifierlevelmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|solutionrelative:healthmodifierlevelmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\healthmodifiercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|solutionrelative:healthmodifiercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\healthmodifierkeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|solutionrelative:healthmodifierkeyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\healthmodifiervalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|solutionrelative:healthmodifiervalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\healthmodifiermenumodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77EC9F6-9369-4321-A46E-0E24545678A8}|HealthModifier.csproj|solutionrelative:healthmodifiermenumodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HealthModifierValue.cs",
+              "DocumentMoniker": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierValue.cs",
+              "RelativeDocumentMoniker": "HealthModifierValue.cs",
+              "ToolTip": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierValue.cs",
+              "RelativeToolTip": "HealthModifierValue.cs",
+              "ViewState": "AQIAAI0AAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-06-11T15:54:34.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HealthModifierMenuModule.cs",
+              "DocumentMoniker": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierMenuModule.cs",
+              "RelativeDocumentMoniker": "HealthModifierMenuModule.cs",
+              "ToolTip": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierMenuModule.cs",
+              "RelativeToolTip": "HealthModifierMenuModule.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAYwDgAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-06-11T15:54:34.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HealthModifierLevelModule.cs",
+              "DocumentMoniker": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierLevelModule.cs",
+              "RelativeDocumentMoniker": "HealthModifierLevelModule.cs",
+              "ToolTip": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierLevelModule.cs",
+              "RelativeToolTip": "HealthModifierLevelModule.cs",
+              "ViewState": "AQIAAGsAAAAAAAAAAAAmwLUAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-06-11T15:54:33.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HealthModifierKeyboard.cs",
+              "DocumentMoniker": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierKeyboard.cs",
+              "RelativeDocumentMoniker": "HealthModifierKeyboard.cs",
+              "ToolTip": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierKeyboard.cs",
+              "RelativeToolTip": "HealthModifierKeyboard.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-06-11T15:54:33.016Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HealthModifierController.cs",
+              "DocumentMoniker": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierController.cs",
+              "RelativeDocumentMoniker": "HealthModifierController.cs",
+              "ToolTip": "E:\\Prog\\Mods\\Blade_And_Sorcery\\HealthModifier\\HealthModifierController.cs",
+              "RelativeToolTip": "HealthModifierController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-06-11T15:54:31.173Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
